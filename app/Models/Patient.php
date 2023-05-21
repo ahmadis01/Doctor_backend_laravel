@@ -13,5 +13,6 @@ class Patient extends Model
         'Name',
         'PhoneNumber',
         'BirthDate',
+        'Address_id'
     ];
 }
