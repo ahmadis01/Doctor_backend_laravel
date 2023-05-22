@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\AddressController;
+use App\Http\Controllers\CityController;
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\PatientController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,8 +17,16 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+//Doctor
+Route::resource('/doctor',DoctorController::class);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
+//Patient
+Route::resource('/patient',PatientController::class);
+
+//City
+Route::resource('/city',CityController::class);
+
+//Address
+Route::resource('/address', AddressController::class);
+Route::get('/address/getByCityId/{cityId}',[AddressController::class ,'getAddressesByCityId']);
