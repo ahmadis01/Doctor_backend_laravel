@@ -18,6 +18,8 @@ class CreateDoctorsTable extends Migration
             $table->string("Name");
             $table->string("PhoneNumber");
             $table->integer("Rate");
+                $table->bigInteger("Specialization_id")->unsigned();
+            $table->foreign("Specialization_id")->references('id')->on('specializations');
             $table->timestamps();
         });
     }

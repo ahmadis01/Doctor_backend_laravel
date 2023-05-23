@@ -17,6 +17,8 @@ class CreateIllnessesTable extends Migration
             $table->id();
             $table->string('Name');
             $table->string('Type');
+            $table->bigInteger("Specialization_id")->unsigned();
+            $table->foreign("Specialization_id")->references('id')->on('specializations');
             $table->timestamps();
         });
     }

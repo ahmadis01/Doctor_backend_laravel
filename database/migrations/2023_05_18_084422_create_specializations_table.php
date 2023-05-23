@@ -15,10 +15,7 @@ class CreateSpecializationsTable extends Migration
     {
         Schema::create('specializations', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('Doctor_id')->unsigned();
-            $table->bigInteger('Illness_id')->unsigned();
-            $table->foreign('Doctor_id')->references('id')->on('doctors')->onDelete('cascade');
-            $table->foreign('Illness_id')->references('id')->on('illnesses')->onDelete('cascade');
+            $table->string('Name');
             $table->timestamps();
         });
     }
