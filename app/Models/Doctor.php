@@ -12,7 +12,8 @@ class Doctor extends Model
         'id',
         'Name',
         'PhoneNumber',
-        'Rate'
+        'Rate',
+        'Specialization_id'
     ];
 
 }

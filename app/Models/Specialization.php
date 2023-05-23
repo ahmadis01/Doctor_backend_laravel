@@ -9,7 +9,7 @@ class Specialization extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'Illness_id',
-        'Doctor_id'
+        'id',
+        'Name'
     ];
 }

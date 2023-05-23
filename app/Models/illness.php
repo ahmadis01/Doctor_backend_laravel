@@ -12,5 +12,6 @@ class Illness extends Model
         'id',
         'Name',
         'Type',
+        'Specialization_id'
     ];
 }
