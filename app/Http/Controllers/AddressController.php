@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
+use App\Models\City;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
@@ -26,8 +27,14 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        $address = Address::create($request->all());
-        return response($address);
+        $request->validate([
+            'City_id' => 'required',
+        ]);
+        if(City::find($request->City_id)){
+            $address = Address::create($request->all());
+            return response($address);
+        }
+        return response()->json(['error' => 'the city is not exists']);
     }
 
     /**
@@ -38,8 +45,12 @@ class AddressController extends Controller
      */
     public function show($id)
     {
-        $address = Address::find($id);
-        return response($address);
+        if(Address::find($id))
+        {
+            $address = Address::find($id);
+            return response($address);
+        }
+        return response()->json(['error' => 'this address not exists']);
     }
 
     /**
@@ -51,8 +62,19 @@ class AddressController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $address = Address::find($id)->udpate($request->all());
-        return response($address);
+        if(Address::find($id))
+        {
+            $request->validate([
+                'City_id' => 'required',
+            ]);
+            if(City::find($request->City_id))
+            {
+                $address = Address::find($id)->udpate($request->all());
+                return response($address);   
+            }
+            return response()->json(['error' => 'the city is not exists']);
+        }
+        return response()->json(['error' => 'this address not exists']);
     }
 
     /**
@@ -63,12 +85,18 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
-        $address = Address::find($id)->delete();
-        return response($address);
+        if(Address::find($id)){
+            $address = Address::find($id)->delete();
+            return response($address);
+        }
+        return response()->json(['error' => 'this address not exists']);
     }
     //get addresses by city id
     public function getAddressesByCityId($cityId){
-        $addresses = Address::where('City_id', $cityId)->get();
-        return response($addresses);
+        if(City::find($cityId)){
+            $addresses = Address::where('City_id', $cityId)->get();
+            return response($addresses);
+        }
+        return response()->json(['error' => 'this city not exists']);
     }
 }

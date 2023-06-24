@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\City;
+use App\Models\Analysis;
 use Illuminate\Http\Request;
 
-class CityController extends Controller
+class AnalysisController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class CityController extends Controller
      */
     public function index()
     {
-        $cities = City::all();
-        return response($cities);
+         $analyses = Analysis::all();
+         return response($analyses);
     }
 
     /**
@@ -27,13 +27,10 @@ class CityController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'Name' => 'unique:Cities,Name'
-        ],
-        [
-            'Name.unique' => 'This city is already exists'
+            'Name' => 'required'
         ]);
-        $city = City::create($request->all());
-        return response($city);
+        $analysis = Analysis::create($request->all());
+        return response($analysis);
     }
 
     /**
@@ -44,11 +41,11 @@ class CityController extends Controller
      */
     public function show($id)
     {
-        if(City::find($id)){
-            $city = City::find($id);
-            return response($city);
+        if(Analysis::find($id)){
+            $analysis = Analysis::find($id);
+            return response($analysis);
         }
-        return response()->json(['error' => 'this city not exists']);
+        return response()->json(['error' => 'the analysis is not exists']);
     }
 
     /**
@@ -60,18 +57,14 @@ class CityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(City::find($id))
-        {
+        if(Analysis::find($id)){
             $request->validate([
-                'Name' => 'unique:Cities,Name'
-            ],
-            [
-                'Name.unique' => 'This city is already exists'
+                'Name' => 'required'
             ]);
-            $city = City::find($id)->update($request->all());
-            return response($city);
+            $result = Analysis::find($id)->update($request->all());
+            response($result);
         }
-        return response()->json(['error' => 'this city not exists']);
+        return response()->json(['error' => 'the analysis is not exists']);
     }
 
     /**
@@ -82,11 +75,11 @@ class CityController extends Controller
      */
     public function destroy($id)
     {
-        if(City::find($id))
+        if(Analysis::find($id))
         {
-            $city = City::find($id)->delete();
-            return response($city);
+            $result = Analysis::destroy($id);
+            return response($result);
         }
-        return response()->json(['error' => 'this city not exists']);
+        return response()->json(['error' => 'the analysis is not exists']);
     }
 }

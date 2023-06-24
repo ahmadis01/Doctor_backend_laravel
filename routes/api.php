@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\LaboratoryController;
 use App\Http\Controllers\PatientController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,3 +32,9 @@ Route::resource('/city',CityController::class);
 //Address
 Route::resource('/address', AddressController::class);
 Route::get('/address/getByCityId/{cityId}',[AddressController::class ,'getAddressesByCityId']);
+
+//Laboratory
+Route::resource('/laboratory' , LaboratoryController::class);
+
+//Analysis
+Route::resource('/analysis', AnalysisController::class);

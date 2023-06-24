@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
-use App\Models\Patient;
-use Dotenv\Store\File\Paths;
+use App\Models\Laboratory;
 use Illuminate\Http\Request;
 
-class PatientController extends Controller
+class LaboratoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $patient = Patient::all();
-        return response($patient);
+        $laborataries = Laboratory::all();
+        return response($laborataries);
     }
 
     /**
@@ -36,10 +35,11 @@ class PatientController extends Controller
         ]);
         if(Address::find($request->Address_id))
         {
-            $patient = Patient::create($request->all());
-            return response($patient);
+            $laboratory = Laboratory::create($request->all());
+            return response($laboratory);
         }
         return response()->json(['error' => 'the address is not exists']);
+
     }
 
     /**
@@ -50,13 +50,12 @@ class PatientController extends Controller
      */
     public function show($id)
     {
-        if(Patient::find($id))
+        if(Laboratory::find($id))
         {
-            $patient = Patient::find($id);
-            return response($patient);
+            $laboratory = Laboratory::find($id);
+            return response($laboratory);
         }
-        return response()->json(['error' => 'the patient is not exists']);
-
+        return response()->json(['error' => 'the laboratory is not exists']);
     }
 
     /**
@@ -68,7 +67,7 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(Patient::find($id))
+        if(Laboratory::find($id))
         {
             $request->validate([
                 'PhoneNumber' => 'digits_between:10,10',
@@ -78,13 +77,15 @@ class PatientController extends Controller
             ]);
             if(Address::find($request->Address_id))
             {
-                $patient = Patient::find($id)->update($request->all());
-                return response($patient);
+                $laboratory = Laboratory::find($id)->update($request->all());
+                return response($laboratory);
             }
             return response()->json(['error' => 'the address is not exists']);
-        }
 
+        }
+        return response()->json(['error' => 'the laboratory is not exists']);
     }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -93,11 +94,11 @@ class PatientController extends Controller
      */
     public function destroy($id)
     {
-        if(Patient::find($id))
+        if(Laboratory::find($id))
         {
-            $patient = Patient::find($id)->delete();
-            return response($patient);
+            $result = Laboratory::find($id)->delete();
+            return response($result);
         }
-        return response()->json(['error' => 'the patient is not exists']);
+        return response()->json(['error' => 'the laboratory is not exists']);
     }
 }

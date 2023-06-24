@@ -26,6 +26,14 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'Name' => 'required',
+            'PhoneNumber' => 'numeric|digits_between:10,10'
+        ],
+        [
+            'PhoneNumber.digits_between' => 'phone number must be 10 digits'
+        ]
+    );
         $doctor = Doctor::create($request->all());
         return response($doctor);
     }
@@ -38,8 +46,11 @@ class DoctorController extends Controller
      */
     public function show($id)
     {
-        $doctor = Doctor::find($id);
-        return response($doctor);
+        if(Doctor::find($id)){
+            $doctor = Doctor::find($id);
+            return response($doctor);
+        }
+        return response()->json(['error', 'this doctor not exists']);
     }
 
     /**
@@ -51,8 +62,18 @@ class DoctorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $doctor = Doctor::find($id)->update($request->all());
-        return response($doctor);
+        if(Doctor::find($id)){
+            $request->validate([
+                'Name' => 'required',
+                'PhoneNumber' => 'numeric|digits_between:10,10'
+            ],
+            [
+                'PhoneNumber.digits_between' => 'phone number must be 10 digits'
+            ]);
+            $doctor = Doctor::find($id)->update($request->all());
+            return response($doctor);
+        }
+        return response()->json(['error' => 'this doctor not exists']);
     }
 
     /**
@@ -63,7 +84,10 @@ class DoctorController extends Controller
      */
     public function destroy($id)
     {
-        $doctor = Doctor::find($id)->delete();
-        return response($doctor);
+        if(Doctor::find($id)){
+            $doctor = Doctor::find($id)->delete();
+            return response($doctor);
+        }
+        return response()->json(['error' => 'this doctor not exists']);
     }
 }
