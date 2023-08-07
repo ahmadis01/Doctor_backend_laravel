@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
+use App\Models\Specialization;
 use Illuminate\Http\Request;
 
 class DoctorController extends Controller
@@ -28,14 +29,20 @@ class DoctorController extends Controller
     {
         $request->validate([
             'Name' => 'required',
-            'PhoneNumber' => 'numeric|digits_between:10,10'
+            'PhoneNumber' => 'numeric|digits_between:10,10',
+            'Specialization_id' => 'required'
         ],
         [
             'PhoneNumber.digits_between' => 'phone number must be 10 digits'
-        ]
-    );
-        $doctor = Doctor::create($request->all());
-        return response($doctor);
+        ]);
+        if(Specialization::find($request->Specialization_id))
+        {
+            $doctor = Doctor::create($request->all());
+            return response($doctor);
+        }else{
+            return response()->json(['error' => 'Specialization not exists']);
+        }
+
     }
 
     /**
@@ -50,7 +57,7 @@ class DoctorController extends Controller
             $doctor = Doctor::find($id);
             return response($doctor);
         }
-        return response()->json(['error', 'this doctor not exists']);
+        return response()->json(['error' => 'this doctor not exists']);
     }
 
     /**

@@ -29,10 +29,8 @@ class PatientController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'PhoneNumber' => 'digits_between:10,10',
+            'Email' => 'email|required',
             'Address_id' => 'required'
-        ],[
-            'PhoneNumber.digits_between' => 'phone number must be 10 digits'
         ]);
         if(Address::find($request->Address_id))
         {

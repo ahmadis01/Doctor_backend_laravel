@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\DateController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\IllnessController;
 use App\Http\Controllers\LaboratoryController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\SpecializationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -38,3 +42,16 @@ Route::resource('/laboratory' , LaboratoryController::class);
 
 //Analysis
 Route::resource('/analysis', AnalysisController::class);
+
+//Specialization
+Route::resource('/specialization', SpecializationController::class);
+
+//Date
+Route::resource('/date',DateController::class);
+
+//Illness
+Route::resource('/illness', IllnessController::class);
+
+//Account
+Route::post('/register',[AccountController::class,'register']);
+Route::post('/login',[AccountController::class,'login']);

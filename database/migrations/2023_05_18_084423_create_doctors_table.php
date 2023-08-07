@@ -16,7 +16,8 @@ class CreateDoctorsTable extends Migration
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
             $table->string("Name");
-            $table->string("PhoneNumber");
+            $table->string("Email");
+            $table->string("Password");
             $table->integer("Rate");
                 $table->bigInteger("Specialization_id")->unsigned();
             $table->foreign("Specialization_id")->references('id')->on('specializations');
