@@ -8,8 +8,12 @@ use App\Http\Controllers\DateController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\IllnessController;
 use App\Http\Controllers\LaboratoryController;
+use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\SpecializationController;
+use App\Http\Controllers\WorkPlaceController;
+use App\Models\Medicine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -55,3 +59,12 @@ Route::resource('/illness', IllnessController::class);
 //Account
 Route::post('/register',[AccountController::class,'register']);
 Route::post('/login',[AccountController::class,'login']);
+
+//Medicine
+Route::resource('/medicine',MedicineController::class);
+
+//Prescription
+Route::resource('/prescription', PrescriptionController::class);
+
+//workplace
+Route::resource('/workPlace' , WorkPlaceController::class);
