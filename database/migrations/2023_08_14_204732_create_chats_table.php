@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDatesTable extends Migration
+class CreateChatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateDatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('dates', function (Blueprint $table) {
+        Schema::create('chats', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('Doctor_id')->unsigned();
+            $table->string('Body');
+            $table->boolean('IsChatGpt');
             $table->bigInteger('Patient_id')->unsigned();
-            $table->dateTime('BookTime');
-            $table->foreign('Doctor_id')->references('id')->on('doctors')->onDelete('cascade');
             $table->foreign('Patient_id')->references('id')->on('patients')->onDelete('cascade');
             $table->timestamps();
         });
@@ -31,6 +30,6 @@ class CreateDatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dates');
+        Schema::dropIfExists('chats');
     }
 }

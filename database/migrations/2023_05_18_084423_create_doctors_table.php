@@ -18,8 +18,9 @@ class CreateDoctorsTable extends Migration
             $table->string("Name");
             $table->string("Email");
             $table->string("Password");
-            $table->integer("Rate");
-                $table->bigInteger("Specialization_id")->unsigned();
+            $table->integer("Rate")->nullable();
+            $table->string("FcmToken")->nullable();
+            $table->bigInteger("Specialization_id")->unsigned();
             $table->foreign("Specialization_id")->references('id')->on('specializations');
             $table->timestamps();
         });

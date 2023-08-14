@@ -17,7 +17,7 @@ class CreateIllnessLaboratoryAnalysesTable extends Migration
             $table->id();
             $table->bigInteger('LaboratoryAnalysis_id')->unsigned();
             $table->bigInteger('Illness_id')->unsigned();
-            $table->Date('Date');
+            $table->Date('Date')->nullable();
             $table->foreign('LaboratoryAnalysis_id')->references('id')->on('laboratory_analyses')->onDelete('cascade');
             $table->foreign('Illness_id')->references('id')->on('illnesses')->onDelete('cascade');
             $table->timestamps();

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Date;
+use App\Models\Appointments;
 use App\Models\Doctor;
 use App\Models\Patient;
 use Illuminate\Http\Request;
@@ -16,7 +16,7 @@ class DateController extends Controller
      */
     public function index()
     {
-        $specializations = Date::paginate(10);
+        $specializations = Appointments::paginate(10);
         return response($specializations);
     }
 
@@ -35,7 +35,7 @@ class DateController extends Controller
         ]);
         if(Doctor::find($request->Doctor_id) && Patient::find($request->patient_id))
         {
-            $date = Date::create($request->all());
+            $date = Appointments::create($request->all());
             return response($date);
         }
         return response()->json(['error','Doctor Or Patient not exist']);
@@ -49,8 +49,8 @@ class DateController extends Controller
      */
     public function show($id)
     {
-        if(Date::find($id)){
-            $date = Date::find($id);
+        if(Appointments::find($id)){
+            $date = Appointments::find($id);
             return response($date);
         }
         return response()->json(['error' , 'the date not exists']);
@@ -65,7 +65,7 @@ class DateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(Date::find($id))
+        if(Appointments::find($id))
         {
             $request->validate([
                 'Doctor_id' => 'required',
@@ -74,7 +74,7 @@ class DateController extends Controller
             ]);
             if(Doctor::find($request->Doctor_id) && Patient::find($request->patient_id))
             {
-                $date = Date::find($id)->update($request->all());
+                $date = Appointments::find($id)->update($request->all());
                 return response($date);
             }
             return response()->json(['error','Doctor Or Patient not exist']);
@@ -90,8 +90,8 @@ class DateController extends Controller
      */
     public function destroy($id)
     {
-        if(Date::find($id)){
-            $result = Date::find($id)->delete();
+        if(Appointments::find($id)){
+            $result = Appointments::find($id)->delete();
             return response($result);
         }
         return response()->json(['error' , 'the date not exists']);

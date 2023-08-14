@@ -18,7 +18,10 @@ class CreatePatientsTable extends Migration
             $table->string("Name");
             $table->string("Email");
             $table->string("Password");
-            $table->date("BirthDate");
+            $table->string("FcmToken")->nullable();
+            $table->integer("Age")->nullable();
+            $table->boolean("Smoked")->nullable();
+            $table->date("BirthDate")->nullable();
             $table->bigInteger('Address_id')->unsigned();
             $table->foreign('Address_id')->references('id')->on('addresses')->onDelete('cascade');
             $table->timestamps();

@@ -14,6 +14,7 @@ class Doctor extends Model
         'Password',
         'Email',
         'Rate',
+        'FcmToken',
         'Specialization_id'
     ];
 
