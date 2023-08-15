@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSensitivesTable extends Migration
+class CreateMedicalFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSensitivesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sensitives', function (Blueprint $table) {
+        Schema::create('medical_files', function (Blueprint $table) {
             $table->id();
             $table->string("Description");
             $table->timestamps();

@@ -30,6 +30,7 @@ class AccountController extends Controller
         }
         return response($account);
     }
+    
     public function login(Request $request)
     {
         if($request->AccountType == 'patient')

@@ -4,7 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\CityController;
-use App\Http\Controllers\DateController;
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\IllnessController;
 use App\Http\Controllers\LaboratoryController;
@@ -30,14 +30,17 @@ use Illuminate\Support\Facades\Artisan;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+Route::get('/migraterollback', function(){
+    Artisan::call('migrate:rollback');
+    dd('rollback!');
+});
 Route::get('/migrate', function(){
     Artisan::call('migrate');
     dd('migrated!');
 });
 //Doctor
 Route::resource('/doctor',DoctorController::class);
-
+Route::get('/getBySpcializationId',[DoctorController::class,'GetDoctorsBySpecializationId']);
 
 //Patient
 Route::resource('/patient',PatientController::class);
@@ -59,7 +62,7 @@ Route::resource('/analysis', AnalysisController::class);
 Route::resource('/specialization', SpecializationController::class);
 
 //Date
-Route::resource('/date',DateController::class);
+Route::resource('/date',AppointmentController::class);
 
 //Illness
 Route::resource('/illness', IllnessController::class);

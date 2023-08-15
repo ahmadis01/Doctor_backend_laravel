@@ -97,4 +97,12 @@ class DoctorController extends Controller
         }
         return response()->json(['error' => 'this doctor not exists']);
     }
+    public function GetDoctorsBySpecializationId($specialization_id)
+    {
+        $specialization = Specialization::find($specialization_id);
+        if($specialization === null)
+            return response()->json(['error' => 'specialization not found']);
+        $doctors = Doctor::where('Specialization_id', $specialization_id)->get();
+        return response($doctors);
+    }
 }

@@ -10,6 +10,6 @@ class Prescription extends Model
     use HasFactory;
     protected $fillable = [
         'id',
-        'Date_id'
+        'Appointment_id'
     ];
 }

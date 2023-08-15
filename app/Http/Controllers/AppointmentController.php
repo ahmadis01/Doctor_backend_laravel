@@ -7,7 +7,7 @@ use App\Models\Doctor;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 
-class DateController extends Controller
+class AppointmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class DateController extends Controller
      */
     public function index()
     {
-        $specializations = Appointments::paginate(10);
-        return response($specializations);
+        $Appointments = Appointments::paginate(10);
+        return response($Appointments);
     }
 
     /**
@@ -53,7 +53,7 @@ class DateController extends Controller
             $date = Appointments::find($id);
             return response($date);
         }
-        return response()->json(['error' , 'the date not exists']);
+        return response()->json(['error' , 'the Appointment not exists']);
     }
 
     /**
@@ -79,7 +79,7 @@ class DateController extends Controller
             }
             return response()->json(['error','Doctor Or Patient not exist']);
         }
-        return response()->json(['error','Date not exist']);
+        return response()->json(['error','Appointment not exist']);
     }
 
     /**
@@ -94,6 +94,6 @@ class DateController extends Controller
             $result = Appointments::find($id)->delete();
             return response($result);
         }
-        return response()->json(['error' , 'the date not exists']);
+        return response()->json(['error' , 'the Appointment not exists']);
     }
 }

@@ -30,7 +30,7 @@ class WorkPlaceController extends Controller
     {
         if(Doctor::find($request->DoctorId) === null)
             return response()->json(['error' => 'Doctor not found']);
-        if(Address::find($request->AddressId))
+        if(Address::find($request->AddressId)=== null)
             return response()->json(['error' => 'Address not found']);
         $request->validate([
             'PlaceName' => 'required',
