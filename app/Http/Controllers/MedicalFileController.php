@@ -13,8 +13,6 @@ class MedicalFileController extends Controller
      */
     public function index()
     {
-        $medicalFiles = Midcal::all();
-        return response($laborataries);
     }
 
     /**
